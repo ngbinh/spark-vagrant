@@ -1,4 +1,18 @@
-vagrant_jdk
+Vagrant template with shell provision for Ubuntu Precise clusers with JDK 7.
 ===========
 
-Simple Vagrantfile with shell provision to install JDK on Ubuntu Precise 12.04 64 bit
+## Installation
+1. Install [vagrant](www.vagrantup.com). *Tested with version 1.4.3*
+2. Install [virtualbox](www.virtualbox.com). *Tested with version 4.2.16 but should work with any 4.+*
+3. Checkout this repo `git clone git@github.com:ngbinh/vagrant_jdk.git`
+4. Change to the directory `cd vagrant_jdk`
+5. Bring up the nodes `vagrant up`
+ 
+
+Note that it will take a while to download Ubuntu Precise image at the first run. Subsequent runs should not have to re-download. 
+
+### Customization
+1. You can change the number of nodes, their basic parameters by modifying `Vagrantfile`.
+2. You can change the JDK version by modifying `scripts/install_jdk7.sh`
+
+

@@ -5,18 +5,25 @@
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.4.2"
 
+# the domain of all the nodes
 DOMAIN = 'local'
 
+# Ubuntu 12.04.4 LTS (Precise Pangolin) 64 bit
 BOX = 'precise64'
 BOX_URL = 'http://files.vagrantup.com/precise64.box'
 
+# define all the nodes here.
+# :host is the id in Vagrant of the node. It will also be its hostname
+# :ip the ip address of the node
+# :cpu the number of core for the node
+# :ram the amount of RAM allocated to the node in MBytes.
 NODES = [
   { :host => 'spark1', :ip => '192.168.2.10', :cpu => 1, :ram => '2048' },
   { :host => 'spark2', :ip => '192.168.2.11', :cpu => 1, :ram => '2048' }
 ]
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   NODES.each do | node |
     config.vm.define node[:host] do | node_config |
       node_config.vm.box = BOX

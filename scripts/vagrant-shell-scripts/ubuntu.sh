@@ -591,11 +591,13 @@ npm-packages-install() {
 oracle-jdk-install() {
   log-operation "$FUNCNAME" "$@"
   dependency-install 'curl'
+  local cookie
   local jdk_link 
-  jdk_link="$1"
+  cookie="$1"
+  jdk_link="$2"
   temp_dir="$( mktemp -d -t 'oracle-jdk-install-XXXXXXXX' )" 
   temp_out_file="$temp_dir"/oracle_jdk.tar.gz
-  curl -L --progress-bar --header "Cookie: s_nr=1359635827494; s_cc=true; gpw_e24=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk6downloads-1902814.html; s_sq=%5B%5BB%5D%5D; gpv_p24=no%20value" "$jdk_link" -o "$temp_out_file"
+  curl -L --progress-bar --header "$cookie" "$jdk_link" -o "$temp_out_file"
 
   tar -xf "$temp_out_file" -C "$temp_dir"
   $SUDO mkdir -p /opt/

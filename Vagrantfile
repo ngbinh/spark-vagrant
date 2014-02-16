@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Using Vagrant shell scripts
+# https://github.com/StanAngeloff/vagrant-shell-scripts
+require File.join(File.dirname(__FILE__), 'scripts/vagrant-shell-scripts/vagrant')
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.require_version ">= 1.4.2"
@@ -18,8 +22,9 @@ BOX_URL = 'http://files.vagrantup.com/precise64.box'
 # :cpu the number of core for the node
 # :ram the amount of RAM allocated to the node in MBytes.
 NODES = [
-  { :host => 'spark1', :ip => '192.168.2.10', :cpu => 1, :ram => '2048' },
-  { :host => 'spark2', :ip => '192.168.2.11', :cpu => 1, :ram => '2048' }
+  { :host => 'spark-master', :ip => '192.168.2.10', :cpu => 1, :ram => '3072' },
+  { :host => 'spark-worker-1', :ip => '192.168.2.20', :cpu => 1, :ram => '2048' },
+  { :host => 'spark-worker-2', :ip => '192.168.2.21', :cpu => 1, :ram => '2048' }
 ]
 
 
@@ -45,8 +50,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vbox.customize ['modifyvm', :id, '--cpus', cpu.to_s]
       end
 
-      node_config.vm.provision :shell do | shell |
-        shell.path = 'scripts/setup.sh'
+      node_config.vm.provision :shell do |shell|
+        vagrant_shell_scripts_configure(
+        shell,
+        File.dirname(__FILE__),
+        'scripts/setup.sh')
       end
     end
   end

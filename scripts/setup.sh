@@ -7,7 +7,7 @@
 
 # Use Google Public DNS for resolving domain names.
 # The default is host-only DNS which may not be installed.
-nameservers-local-purge
+# nameservers-local-purge
 # nameservers-append '8.8.8.8'
 # nameservers-append '8.8.4.4'
 

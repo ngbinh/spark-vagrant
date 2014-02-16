@@ -585,6 +585,34 @@ npm-packages-install() {
 
 # }}}
 
+# {{{ Oracle JDK (Oracle Java Development Kit)
+
+# Install Oracle JDK to /opt/java, update defaults and add it to PATH
+oracle-jdk-install() {
+  log-operation "$FUNCNAME" "$@"
+  dependency-install 'curl'
+  local jdk_link 
+  jdk_link="$1"
+  temp_dir="$( mktemp -d -t 'oracle-jdk-install-XXXXXXXX' )" 
+  temp_out_file="$temp_dir"/oracle_jdk.tar.gz
+  curl -L --progress-bar --header "Cookie: s_nr=1359635827494; s_cc=true; gpw_e24=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk6downloads-1902814.html; s_sq=%5B%5BB%5D%5D; gpv_p24=no%20value" "$jdk_link" -o "$temp_out_file"
+
+  tar -xf "$temp_out_file" -C "$temp_dir"
+  $SUDO mkdir -p /opt/
+  $SUDO mv "$temp_dir"/j* /opt/java
+
+  $SUDO update-alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1
+  $SUDO update-alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1
+  $SUDO update-alternatives --install "/usr/bin/javaws" "javaws" "/opt/java/bin/javaws" 1
+
+  rm -rf "$temp_dir"
+
+  env-append 'JAVA_HOME' "/opt/java/"
+  env-append 'PATH' "/opt/java/bin/"
+}
+
+# }}}
+
 # {{{ GitHub
 
 # Download and install RubyGems from GitHub.

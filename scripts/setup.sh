@@ -1,6 +1,7 @@
 #!/bin/bash
 
 <%= import 'scripts/vagrant-shell-scripts/ubuntu.sh' %>
+<%= import 'scripts/vagrant-shell-scripts/ubuntu-extras.sh' %>
 
 # }}}
 
@@ -21,8 +22,5 @@ apt-packages-install \
   git \
   curl
 
-<%= import 'scripts/install_jdk7.sh' %>
-
-env-append 'JAVA_HOME' "/opt/java7/"
-env-append 'PATH' "/opt/java7/bin/"
+oracle-jdk-install "http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz"
 

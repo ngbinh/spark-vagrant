@@ -27,7 +27,6 @@ NODES = [
   { :host => 'spark-worker-2', :ip => '192.168.2.21', :cpu => 1, :ram => '2048' }
 ]
 
-
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   NODES.each do | node |
     config.vm.define node[:host] do | node_config |
@@ -48,6 +47,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vbox.gui = false
         vbox.customize ['modifyvm', :id, '--memory', memory.to_s]
         vbox.customize ['modifyvm', :id, '--cpus', cpu.to_s]
+
+        # fix the connection slow
+        # https://github.com/mitchellh/vagrant/issues/1807
+        vbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        vbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
       end
 
       node_config.vm.provision :shell do |shell|

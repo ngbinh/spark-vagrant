@@ -2,8 +2,8 @@ Vagrant template with shell provision for Ubuntu Precise clusers with JDK 7.
 ===========
 
 ## Installation
-1. Install [vagrant](www.vagrantup.com). *Tested with version 1.4.3*
-2. Install [virtualbox](www.virtualbox.com). *Tested with version 4.2.16 but should work with any 4.+*
+1. Install [vagrant](//www.vagrantup.com). *Tested with version 1.4.3*
+2. Install [virtualbox](//www.virtualbox.org). *Tested with version 4.2.16 but should work with any 4.+*
 3. Checkout this repo `git clone git@github.com:ngbinh/vagrant_jdk.git`
 4. Change to the directory `cd vagrant_jdk`
 5. Bring up the nodes `vagrant up`

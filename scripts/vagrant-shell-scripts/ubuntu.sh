@@ -593,21 +593,23 @@ oracle-jdk-install() {
   dependency-install 'curl'
   local cookie
   local jdk_link 
+  local target
   cookie="$1"
-  jdk_link="$2"
-  temp_dir="$( mktemp -d -t 'oracle-jdk-install-XXXXXXXX' )" 
+  jdk_link="$2"  
+  temp_dir="$3" 
   temp_out_file="$temp_dir"/oracle_jdk.tar.gz
-  curl -L --progress-bar --header "$cookie" "$jdk_link" -o "$temp_out_file"
+  # download if the file is not exists
+  if [ ! -f "$temp_out_file" ]; then
+    curl -L --progress-bar --header "$cookie" "$jdk_link" -o "$temp_out_file"
+  fi
 
   tar -xf "$temp_out_file" -C "$temp_dir"
   $SUDO mkdir -p /opt/
-  $SUDO mv "$temp_dir"/j* /opt/java
+  $SUDO mv "$temp_dir"/jdk* /opt/java
 
   $SUDO update-alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1
   $SUDO update-alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1
   $SUDO update-alternatives --install "/usr/bin/javaws" "javaws" "/opt/java/bin/javaws" 1
-
-  rm -rf "$temp_dir"
 
   env-append 'JAVA_HOME' "/opt/java/"
   env-append 'PATH' "/opt/java/bin/"

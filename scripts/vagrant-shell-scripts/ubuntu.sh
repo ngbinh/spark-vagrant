@@ -600,7 +600,7 @@ oracle-jdk-install() {
   temp_out_file="$temp_dir"/oracle_jdk.tar.gz
   # download if the file is not exists
   if [ ! -f "$temp_out_file" ]; then
-    curl -L --progress-bar --header "$cookie" "$jdk_link" -o "$temp_out_file"
+    curl -L --progress-bar --header "$cookie" "$jdk_link" -z "$temp_out_file" -o "$temp_out_file"
   fi
 
   tar -xf "$temp_out_file" -C "$temp_dir"

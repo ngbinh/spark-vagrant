@@ -14,7 +14,7 @@ DOMAIN = 'local'
 
 # Ubuntu 12.04.4 LTS (Precise Pangolin) 64 bit
 BOX = 'precise64'
-BOX_URL = 'http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box'
+BOX_URL = 'http://files.vagrantup.com/precise64.box'
 
 # define all the nodes here.
 # :host is the id in Vagrant of the node. It will also be its hostname

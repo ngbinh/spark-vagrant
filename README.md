@@ -1,4 +1,4 @@
-Vagrant template with shell provision for Ubuntu Precise clusers with JDK 7.
+Vagrant support for Apache Spark
 ===========
 
 ## Installation

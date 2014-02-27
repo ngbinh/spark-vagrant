@@ -8,7 +8,7 @@ Vagrant template with shell provision for Ubuntu Precise clusers with JDK 7.
 4. Change to the directory `cd vagrant_jdk`
 5. Bring up the nodes `vagrant up`
 6. Wait a while, then make sure the nodes are up: `vagrant status`. You should see three nodes named `spark-master`, `spark-worker-1` and `spark-worker-2` running. 
-
+7. Access the nodes with user `spark-user` and password `spark`.
 
 Note that it will take a while to download Ubuntu Precise image at the first run. Subsequent runs should not have to re-download. 
 

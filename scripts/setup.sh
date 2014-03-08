@@ -31,7 +31,7 @@ if [ getent passwd spark-user > /dev/null 2>&1 ]; then
 	echo "user spark-user exists. Skipping create user"
 else
 	echo "creating (sudo) user spark-user"
-    sudo useradd -m -G `groups vagrant | cut -d" " -f4- | sed 's/ /,/g'` -s/bin/bash -p `mkpasswd spark` spark-user
+    sudo useradd -m -G `id -Gn vagrant | tr ' ' ','` -p `mkpasswd spark` spark-user
     echo "sucess"
 fi
 # done. Create user
